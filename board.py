@@ -1,10 +1,9 @@
-import os
 from pandas.core.frame import DataFrame
 from pyairtable import Table
 import pandas as pd
 import dash
-from dash import dcc
-from dash import html
+import dash_core_components as dcc
+import dash_html_components as html
 import plotly.express as px
 from dash.dependencies import Input, Output
 
@@ -43,10 +42,10 @@ app.layout = html.Div([
         dcc.Tab(label='Reach', value='reach'),
         dcc.Tab(label='Focus', value='focus'),
     ]),
-    html.Div(id='dashboard', children="A dashboard with up to date stats on original Black CensUs Survey")
+    html.Div(id='oard', children="A oard with up to date stats on original Black CensUs Survey")
 ])
 
-@app.callback(Output('dashboard', 'children'),
+@app.callback(Output('oard', 'children'),
               Input('tabs-data', 'value'))
 def render_content(tab):
     if tab == 'type':
@@ -89,14 +88,14 @@ def render_content(tab):
     #             figure=programs
     #         )
     #     ])
-    # elif tab == 'customers':
-    #     return html.Div([
-    #         html.H3('Customers'),
-    #         dcc.Graph(
-    #             id='customers-graph',
-    #             figure=customers
-    #         )
-    #     ])
+    elif tab == 'customers':
+        return html.Div([
+            html.H3('Customers'),
+            dcc.Graph(
+                id='customers-graph',
+                figure=customers
+            )
+        ])
     elif tab == 'reach':
         return html.Div([
             html.H3('Reach'),
